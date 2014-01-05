@@ -1,7 +1,7 @@
 utils.js
 ========
-**Convert number to word**
 utils.numberToWord(num) 
-
+-------------------------------------
+**Convert number to word**
 
 
