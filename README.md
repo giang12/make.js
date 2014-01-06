@@ -1,6 +1,6 @@
-utils.js
+make.js
 ========
-utils.numberToWord(num) 
+make.numberToWord(num) 
 -------------------------------------
 **Convert number to word**
 
