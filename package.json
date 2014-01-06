@@ -1,0 +1,52 @@
+{
+  "name": "make",
+
+  "title": "make",
+
+  "description": "JavaScript library for miscellaneous utilities",
+
+  "version": "0.0.1",
+
+  "main": "dist/make.js",
+
+  "homepage": "",
+
+  "author": {
+    "name": "Giang Nguyen",
+    "url": "http://giang.is"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giang12/make.js"
+  },
+
+  "keywords": [
+    "help",
+    "utils",
+    "javascript",
+    "library"
+  ],
+
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": ""
+    }
+  ],
+
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  
+  "dependencies": {},
+
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7"
+  }
+}

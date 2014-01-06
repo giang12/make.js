@@ -1,4 +1,7 @@
-var utils = (function () {
+/*! make - v0.0.1 - 2014-01-06
+* https://github.com/giang12/make.js
+* Copyright (c) 2014 Giang Nguyen (http://giang.is); Licensed MIT */
+(function (window, undefined) {
 
     var oneTo19 = ["", "one", "two",
         "three", "four", "five", "six",
@@ -35,13 +38,13 @@ var utils = (function () {
         var numString = num.toString().split("");
 
         if (numString.length > MAX)
-            throw "Out of Range";
+            throw new Error("Out of Bound");
         //Special cases
         if(num == '0')
 			return "zero";
         if(numString[0] == "-"){
 			numString.shift();
-			return "Negative " + numberToWord(numString.join(""));
+			return "negative " + numberToWord(numString.join(""));
         }
 
         //General cases
@@ -72,9 +75,9 @@ var utils = (function () {
     function _convertHundredToWord(num, and) {
 
         if (typeof num !== "number")
-            throw "Unexpected Argument";
+            throw new Error("Unexpected Argument");
         if (num > 1999)
-            throw "Out of Bound";
+            throw new Error("Out of Bound");
 
         and = typeof and === "boolean" ? and : false;
         var hundred = Math.floor(num / 100),
@@ -97,21 +100,35 @@ var utils = (function () {
 
         return result;
     }
+    
 
-    return {
-        numberToWord: numberToWord,
-    };
-})();
+    window.make = typeof window.make === "object" ? window.make : {};
+
+    window.make.numberToWord = numberToWord;
+    return window;
+
+})(window || this);
 
 
-console.log(utils.numberToWord(423142400, true));//four hundred twentythree million one hundred fortytwo thousand four hundred
 
-console.log(utils.numberToWord(13101, true));//thirteen thousand one hundred and one
 
-console.log(utils.numberToWord(9007199254740992,true));//nine quadrillion seven trillion one hundred ninetynine billion two hundred fiftyfour million seven hundred forty thousand nine hundred and ninetytwo
 
-console.log(utils.numberToWord(123123123123123));//one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree
 
-console.log(utils.numberToWord(-123123123123123));//Negative one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree
+(function (window, undefined) {
 
-console.log(utils.numberToWord(0,true));//0
+    function formatTime(ms){
+        return{
+            milliseconds : Math.floor % 1000 || 0,
+            seconds : Math.floor(ms / 1000) % 60 || 0,
+            minutes : Math.floor(ms / (1000 * 60)) % 60 || 0,
+            hours : Math.floor(ms / (1000 * 60 * 60)) % 24 || 0,
+            days : Math.floor(ms / (1000 * 60 * 60 * 24)) || 0
+        };
+   
+    }
+
+    window.make = typeof window.make === "object" ? window.make : {};
+
+    window.make.formatTime = formatTime;
+
+})(window || this);

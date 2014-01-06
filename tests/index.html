@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Make JS Test Suite</title>
+	<link rel="stylesheet" href="qunit/qunit.css">
+	<link rel="stylesheet" href="qunit/qunit-composite.css">
+	<script src="qunit/qunit.js"></script>
+	<script src="qunit/qunit-composite.js"></script>
+	<script>
+	var tests =[
+			"makeTest.html",
+			"numberToWordTest.html",			
+
+	];
+	for(var x = 0; x < tests.length; x++){
+		QUnit.testSuites([
+			tests[x]
+		]);
+	}
+		
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+</body>
+</html>

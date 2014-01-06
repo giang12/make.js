@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Number To Word test</title>
+  <link rel="stylesheet" href="qunit/qunit.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="qunit/qunit.js"></script>
+  <script src="../lib/numberToWord.js"></script>
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+test("make",function(){
+
+console.log(window.make);
+deepEqual(make === window.make,true)
+deepEqual(typeof make === "object",true);
+deepEqual(typeof make.numberToWord === "function",true);
+
+});	
+
+test( "Unit: numberToWord Fn: numberToWord", function() {
+  deepEqual( make.numberToWord(13101, true) , "thirteen thousand one hundred and one");
+  deepEqual( (function(){
+  	try{
+  		make.numberToWord("44323243242342342342343434234343434234234342343434434234234323142400", true);
+  	}catch(e){
+  		if(e.message === "Out of Bound")
+  			return true;
+  	}
+  	return false;
+  	})(), true
+  );
+
+  deepEqual( make.numberToWord(9007199254740992, true) , "nine quadrillion seven trillion one hundred ninetynine billion two hundred fiftyfour million seven hundred forty thousand nine hundred and ninetytwo");
+  deepEqual( make.numberToWord(123123123123123) , "one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree");
+  deepEqual( make.numberToWord(-123123123123123) , "negative one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree");
+});
+</script>
