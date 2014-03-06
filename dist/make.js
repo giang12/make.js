@@ -1,4 +1,4 @@
-/*! make - v0.0.1 - 2014-01-07
+/*! make - v0.0.1 - 2014-03-06
 * https://github.com/giang12/make.js
 * Copyright (c) 2014 Giang Nguyen (http://giang.is); Licensed MIT */
 (function(window, undefined) {
