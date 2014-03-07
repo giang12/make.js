@@ -22,10 +22,12 @@ console.log(window.make);
 deepEqual(make === window.make,true)
 deepEqual(typeof make === "object",true);
 deepEqual(typeof make.numberToWord === "function",true);
+deepEqual(typeof make.gcd === "function",true);
+deepEqual(typeof make.lcm === "function",true);
 
 });	
 
-test( "Unit: numberToWord Fn: numberToWord", function() {
+test( "Unit: number Fn: numberToWord", function() {
   deepEqual( make.numberToWord(13101, true) , "thirteen thousand one hundred and one");
   deepEqual( (function(){
   	try{
@@ -42,4 +44,16 @@ test( "Unit: numberToWord Fn: numberToWord", function() {
   deepEqual( make.numberToWord(123123123123123) , "one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree");
   deepEqual( make.numberToWord(-123123123123123) , "negative one hundred twentythree trillion one hundred twentythree billion one hundred twentythree million one hundred twentythree thousand one hundred twentythree");
 });
+
+test( "Unit: number Fn: gcd", function() {
+  deepEqual( make.gcd([57,0,-45,-18,90,447]) , 3);
+  deepEqual( make.gcd(12), 12);
+ 
+});
+
+test( "Unit: number Fn: lcm", function() {
+  deepEqual( make.lcm([34,21,12]) , 1428);
+ 
+});
+
 </script>
