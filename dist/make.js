@@ -1,4 +1,4 @@
-/*! make - v0.0.1 - 2014-03-06
+/*! make - v0.0.1 - 2014-03-11
 * https://github.com/giang12/make.js
 * Copyright (c) 2014 Giang Nguyen (http://giang.is); Licensed MIT */
 (function(window, undefined) {
@@ -134,7 +134,7 @@
     }
 
 
-    function gcd(numArr) // numArr is an integer array (e.g. [57,0,-45,-18,90,447])
+    function gcd(numArr, optNum) // numArr is an integer array (e.g. [57,0,-45,-18,90,447])
     {
 
         if (Object.prototype.toString.call(numArr) !== '[object Array]') {
@@ -144,6 +144,10 @@
             } else {
                 throw new Error("Unexpected Argument");
 
+            }
+
+            if (typeof optNum === "number") {
+                numArr.push(optNum);
             }
         }
 
@@ -163,9 +167,23 @@
         return x; //3
     }
 
-    function lcm(numArr) {
+    function lcm(numArr, optNum) {
 
-        if (Object.prototype.toString.call(numArr) !== '[object Array]' || numArr.length < 2) {
+        if (Object.prototype.toString.call(numArr) !== '[object Array]') {
+
+            if (typeof numArr === "number") {
+                numArr = [numArr];
+            } else {
+                throw new Error("Unexpected Argument");
+
+            }
+            if (typeof optNum === "number") {
+                numArr.push(optNum);
+            }
+
+        }
+
+        if (numArr.length < 2) {
             throw new Error("Unexpected Argument");
         }
 
