@@ -1,4 +1,4 @@
-/*! make - v0.0.1 - 2014-03-11
+/*! make - v0.0.1 - 2014-06-04
 * https://github.com/giang12/make.js
 * Copyright (c) 2014 Giang Nguyen (http://giang.is); Licensed MIT */
 (function(window, undefined) {
@@ -268,11 +268,94 @@
 
     }
 
+    function timer(time, update, complete) {
+
+        function Timer(t, u, c) {
+            var start = new Date().getTime();
+            var interval = setInterval(function() {
+                var now = t - (new Date().getTime() - start);
+                if (now <= 0) {
+                    clearInterval(interval);
+                    c();
+                } else u(Math.floor(now / 1000));
+            }, 100); // the smaller this number, the more accurate the timer will be
+            this.clearTimer = function clearTimer() {
+                clearInterval(interval);
+            };
+        }
+        return new Timer(time, update, complete);
+    }
     //hook to global make namespace
     window.make = typeof window.make === "object" ? window.make : {};
     //add public interface
     window.make.formatTime = formatTime;
     window.make.timeDiff = timeDiff;
+    window.make.timer = timer;
+})(window || this);
+(function(window, undefined) {
+
+    _urlLocation = window.location;
+
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+    }
+
+    function addURLParameter(key, value) {
+
+        pathname = urlPathname();
+        query = urlQuery();
+        param = query.split("#").join('').split('&'); //this hard removing hashtag may be a problem what I dont give a fuck right now
+        map = {};
+        if (param[0] !== '' || param.length > 1) {
+            for (x = 0; x < param.length; x++) {
+                pair = param[x].split('=');
+                map[pair[0]] = pair[1] ? pair[1] : '';
+            }
+        }
+        map[key] = encodeURI(value); //encodeURIComponent(value);
+        var result = '';
+        for (var k in map) {
+
+            result += result === '' ? (k + "=" + map[k]) : "&" + (k + "=" + map[k]);
+        }
+        history.pushState(null, '', pathname + "?" + result);
+    }
+
+    function urlLocation() {
+
+        return _urlLocation;
+    }
+
+    function urlQuery() {
+
+        return (typeof(urlLocation.search) === "undefined" ? "" : urlLocation.search.substring(1));
+    }
+
+    function urlHref() {
+
+        return urlLocation.href;
+    }
+
+    function urlProtocol() {
+
+        return urlLocation.protocol;
+    }
+
+    function urlPathname() {
+
+        return (typeof(urlLocation.pathname) === "undefined" ? "" : urlLocation.pathname);
+    }
+
+    //hook to global make namespace
+    window.make = typeof window.make === "object" ? window.make : {};
+    //add public interface
+    window.make.getURLParameter = getURLParameter;
+    window.make.addURLParameter = addURLParameter;
+    window.make.urlLocation = urlLocation;
+    window.make.urlQuery = urlQuery;
+    window.make.urlHref = urlHref;
+    window.make.urlProtocol = urlProtocol;
+    window.make.urlPathname = urlPathname;
 
 })(window || this);
 })(this);
