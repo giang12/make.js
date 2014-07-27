@@ -1,4 +1,4 @@
-/*! make - v0.0.1 - 2014-06-04
+/*! make - v0.0.1 - 2014-07-26
 * https://github.com/giang12/make.js
 * Copyright (c) 2014 Giang Nguyen (http://giang.is); Licensed MIT */
 (function(window, undefined) {
@@ -232,6 +232,16 @@
 
         if (typeof ms !== "number")
             throw new Error("Unexpected Argument");
+
+        milliseconds = ms % 1000 || 0;
+        seconds = Math.floor(ms / ms2s) % 60 || 0;
+        minutes = Math.floor(ms / s2m) % 60 || 0;
+        hours = Math.floor(ms / m2h) % 24 || 0;
+        days = Math.floor(ms / h2d) || 0;
+        stringFormatted = (days !== 0 ? days + (days > 1 ? " days " : " day ") : "") +
+            (hours !== 0 ? hours + (hours > 1 ? " hours " : " hour ") : "") +
+            (minutes !== 0 ? minutes + (minutes > 1 ? " minutes " : " minute ") : "") +
+            (seconds !== 0 ? seconds + (seconds > 1 ? " seconds " : " second ") : "");
         switch (op) {
 
             case "s":
@@ -258,11 +268,14 @@
 
             default:
                 return {
-                    milliseconds: ms % 1000 || 0,
-                    seconds: Math.floor(ms / ms2s) % 60 || 0,
-                    minutes: Math.floor(ms / s2m) % 60 || 0,
-                    hours: Math.floor(ms / m2h) % 24 || 0,
-                    days: Math.floor(ms / h2d) || 0
+                    milliseconds: milliseconds,
+                    seconds: seconds,
+                    minutes: minutes,
+                    hours: hours,
+                    days: days,
+                    toString: function() {
+                        return stringFormatted;
+                    },
                 };
         }
 
@@ -276,8 +289,13 @@
                 var now = t - (new Date().getTime() - start);
                 if (now <= 0) {
                     clearInterval(interval);
-                    c();
-                } else u(Math.floor(now / 1000));
+                    if (typeof c === "function") {
+                        c();
+                    }
+                } else if (typeof u === "function") {
+                    u(Math.floor(now / 1000));
+
+                }
             }, 100); // the smaller this number, the more accurate the timer will be
             this.clearTimer = function clearTimer() {
                 clearInterval(interval);
