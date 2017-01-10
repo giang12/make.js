@@ -20,3 +20,25 @@ make.timeDiff(time1,time2,op)
 make.formatTime(time) 
 -------------------------------------
 **Format Time**
+
+make.timer(time, update, complete)
+-------------------------------------
+**complete() callback upon "time" up**
+
+**update(timeLeftOver) callback**
+
+URL
+-------------------------------------
+make.getURLParameter(name) 
+
+make.addURLParameter(key, value)
+
+make.urlLocation() 
+
+make.urlQuery()
+
+make.urlHref()
+
+make.urlProtocol()
+
+make.urlPathname()
